@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f611dab5258a44b9b817f5d1224c7366" Name="Diagram1">
+        <EntityTypeShape EntityType="CrystalBeamModel1.room_details" Width="1.5" PointX="5.125" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CrystalBeamModel1.staff_details" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CrystalBeamModel1.student_details" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CrystalBeamModel1.visitor_details" Width="1.5" PointX="7.125" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="CrystalBeamModel1.FK_student_details_room_details" ManuallyRouted="false" />
+        <AssociationConnector Association="CrystalBeamModel1.FK_visitor_details_room_details" ManuallyRouted="false" />
+        <AssociationConnector Association="CrystalBeamModel1.FK_visitor_details_student_details" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

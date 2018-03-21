@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CrystalBeamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="room_details">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category" Type="nvarchar" MaxLength="50" />
+    <Property Name="price" Type="nvarchar" MaxLength="10" />
+    <Property Name="status" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="staff_details">
+    <Key>
+      <PropertyRef Name="staff_id" />
+    </Key>
+    <Property Name="staff_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="other_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_previledge" Type="nvarchar" MaxLength="15" />
+    <Property Name="date_time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="student_details">
+    <Key>
+      <PropertyRef Name="student_id" />
+    </Key>
+    <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="other_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="nationalty" Type="nvarchar" MaxLength="20" />
+    <Property Name="phone_no" Type="nvarchar" MaxLength="20" />
+    <Property Name="room_id" Type="int" />
+    <Property Name="time_in" Type="date" />
+    <Property Name="time_out" Type="date" />
+  </EntityType>
+  <EntityType Name="visitor_details">
+    <Key>
+      <PropertyRef Name="visitor_id" />
+    </Key>
+    <Property Name="visitor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="other_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" />
+    <Property Name="phone_no" Type="nvarchar" MaxLength="15" />
+    <Property Name="student_id" Type="int" />
+    <Property Name="room_id" Type="int" />
+    <Property Name="time_in" Type="datetime" />
+    <Property Name="time_out" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_student_details_room_details">
+    <End Role="room_details" Type="Self.room_details" Multiplicity="0..1" />
+    <End Role="student_details" Type="Self.student_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="room_details">
+        <PropertyRef Name="room_id" />
+      </Principal>
+      <Dependent Role="student_details">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_visitor_details_room_details">
+    <End Role="room_details" Type="Self.room_details" Multiplicity="0..1" />
+    <End Role="visitor_details" Type="Self.visitor_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="room_details">
+        <PropertyRef Name="room_id" />
+      </Principal>
+      <Dependent Role="visitor_details">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_visitor_details_student_details">
+    <End Role="student_details" Type="Self.student_details" Multiplicity="0..1" />
+    <End Role="visitor_details" Type="Self.visitor_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student_details">
+        <PropertyRef Name="student_id" />
+      </Principal>
+      <Dependent Role="visitor_details">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CrystalBeamModelStoreContainer">
+    <EntitySet Name="room_details" EntityType="Self.room_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="staff_details" EntityType="Self.staff_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_details" EntityType="Self.student_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="visitor_details" EntityType="Self.visitor_details" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_student_details_room_details" Association="Self.FK_student_details_room_details">
+      <End Role="room_details" EntitySet="room_details" />
+      <End Role="student_details" EntitySet="student_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_visitor_details_room_details" Association="Self.FK_visitor_details_room_details">
+      <End Role="room_details" EntitySet="room_details" />
+      <End Role="visitor_details" EntitySet="visitor_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_visitor_details_student_details" Association="Self.FK_visitor_details_student_details">
+      <End Role="student_details" EntitySet="student_details" />
+      <End Role="visitor_details" EntitySet="visitor_details" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

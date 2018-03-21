@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CrystalBeamModel1StoreContainer" CdmEntityContainer="CrystalBeamERD">
+    <EntitySetMapping Name="room_details">
+      <EntityTypeMapping TypeName="CrystalBeamModel1.room_details">
+        <MappingFragment StoreEntitySet="room_details">
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="room_no" ColumnName="room_no" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="staff_details">
+      <EntityTypeMapping TypeName="CrystalBeamModel1.staff_details">
+        <MappingFragment StoreEntitySet="staff_details">
+          <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="other_name" ColumnName="other_name" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user_previledge" ColumnName="user_previledge" />
+          <ScalarProperty Name="date_time" ColumnName="date_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_details">
+      <EntityTypeMapping TypeName="CrystalBeamModel1.student_details">
+        <MappingFragment StoreEntitySet="student_details">
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="other_name" ColumnName="other_name" />
+          <ScalarProperty Name="nationalty" ColumnName="nationalty" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="room_no" ColumnName="room_no" />
+          <ScalarProperty Name="time_in" ColumnName="time_in" />
+          <ScalarProperty Name="time_out" ColumnName="time_out" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="visitor_details">
+      <EntityTypeMapping TypeName="CrystalBeamModel1.visitor_details">
+        <MappingFragment StoreEntitySet="visitor_details">
+          <ScalarProperty Name="visitor_id" ColumnName="visitor_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="other_name" ColumnName="other_name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="room_no" ColumnName="room_no" />
+          <ScalarProperty Name="time_in" ColumnName="time_in" />
+          <ScalarProperty Name="time_out" ColumnName="time_out" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

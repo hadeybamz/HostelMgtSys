@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CrystalBeamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="room_details">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="nvarchar" MaxLength="10" />
+          <Property Name="status" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="staff_details">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="other_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_previledge" Type="nvarchar" MaxLength="15" />
+          <Property Name="date_time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="student_details">
+          <Key>
+            <PropertyRef Name="student_id" />
+          </Key>
+          <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="other_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="nationalty" Type="nvarchar" MaxLength="20" />
+          <Property Name="phone_no" Type="nvarchar" MaxLength="20" />
+          <Property Name="room_id" Type="int" />
+          <Property Name="time_in" Type="date" />
+          <Property Name="time_out" Type="date" />
+        </EntityType>
+        <EntityType Name="visitor_details">
+          <Key>
+            <PropertyRef Name="visitor_id" />
+          </Key>
+          <Property Name="visitor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="other_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone_no" Type="nvarchar" MaxLength="15" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="room_id" Type="int" />
+          <Property Name="time_in" Type="datetime" />
+          <Property Name="time_out" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_student_details_room_details">
+          <End Role="room_details" Type="Self.room_details" Multiplicity="0..1" />
+          <End Role="student_details" Type="Self.student_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_details">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="student_details">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_visitor_details_room_details">
+          <End Role="room_details" Type="Self.room_details" Multiplicity="0..1" />
+          <End Role="visitor_details" Type="Self.visitor_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_details">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="visitor_details">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_visitor_details_student_details">
+          <End Role="student_details" Type="Self.student_details" Multiplicity="0..1" />
+          <End Role="visitor_details" Type="Self.visitor_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student_details">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="visitor_details">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrystalBeamModelStoreContainer">
+          <EntitySet Name="room_details" EntityType="Self.room_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff_details" EntityType="Self.staff_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student_details" EntityType="Self.student_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="visitor_details" EntityType="Self.visitor_details" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_student_details_room_details" Association="Self.FK_student_details_room_details">
+            <End Role="room_details" EntitySet="room_details" />
+            <End Role="student_details" EntitySet="student_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_visitor_details_room_details" Association="Self.FK_visitor_details_room_details">
+            <End Role="room_details" EntitySet="room_details" />
+            <End Role="visitor_details" EntitySet="visitor_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_visitor_details_student_details" Association="Self.FK_visitor_details_student_details">
+            <End Role="student_details" EntitySet="student_details" />
+            <End Role="visitor_details" EntitySet="visitor_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CrystalBeamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="room_details">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="student_details" Relationship="Self.FK_student_details_room_details" FromRole="room_details" ToRole="student_details" />
+          <NavigationProperty Name="visitor_details" Relationship="Self.FK_visitor_details_room_details" FromRole="room_details" ToRole="visitor_details" />
+        </EntityType>
+        <EntityType Name="staff_details">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="other_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_previledge" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="student_details">
+          <Key>
+            <PropertyRef Name="student_id" />
+          </Key>
+          <Property Name="student_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="other_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nationalty" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="phone_no" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="time_in" Type="DateTime" Precision="0" />
+          <Property Name="time_out" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="room_details" Relationship="Self.FK_student_details_room_details" FromRole="student_details" ToRole="room_details" />
+          <NavigationProperty Name="visitor_details" Relationship="Self.FK_visitor_details_student_details" FromRole="student_details" ToRole="visitor_details" />
+        </EntityType>
+        <EntityType Name="visitor_details">
+          <Key>
+            <PropertyRef Name="visitor_id" />
+          </Key>
+          <Property Name="visitor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="other_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone_no" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="time_in" Type="DateTime" Precision="3" />
+          <Property Name="time_out" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="room_details" Relationship="Self.FK_visitor_details_room_details" FromRole="visitor_details" ToRole="room_details" />
+          <NavigationProperty Name="student_details" Relationship="Self.FK_visitor_details_student_details" FromRole="visitor_details" ToRole="student_details" />
+        </EntityType>
+        <Association Name="FK_student_details_room_details">
+          <End Role="room_details" Type="Self.room_details" Multiplicity="0..1" />
+          <End Role="student_details" Type="Self.student_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_details">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="student_details">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_visitor_details_room_details">
+          <End Role="room_details" Type="Self.room_details" Multiplicity="0..1" />
+          <End Role="visitor_details" Type="Self.visitor_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_details">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="visitor_details">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_visitor_details_student_details">
+          <End Role="student_details" Type="Self.student_details" Multiplicity="0..1" />
+          <End Role="visitor_details" Type="Self.visitor_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student_details">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="visitor_details">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrystalBeamEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="room_details" EntityType="Self.room_details" />
+          <EntitySet Name="staff_details" EntityType="Self.staff_details" />
+          <EntitySet Name="student_details" EntityType="Self.student_details" />
+          <EntitySet Name="visitor_details" EntityType="Self.visitor_details" />
+          <AssociationSet Name="FK_student_details_room_details" Association="Self.FK_student_details_room_details">
+            <End Role="room_details" EntitySet="room_details" />
+            <End Role="student_details" EntitySet="student_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_visitor_details_room_details" Association="Self.FK_visitor_details_room_details">
+            <End Role="room_details" EntitySet="room_details" />
+            <End Role="visitor_details" EntitySet="visitor_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_visitor_details_student_details" Association="Self.FK_visitor_details_student_details">
+            <End Role="student_details" EntitySet="student_details" />
+            <End Role="visitor_details" EntitySet="visitor_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CrystalBeamModelStoreContainer" CdmEntityContainer="CrystalBeamEntities">
+          <EntitySetMapping Name="room_details">
+            <EntityTypeMapping TypeName="CrystalBeamModel.room_details">
+              <MappingFragment StoreEntitySet="room_details">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff_details">
+            <EntityTypeMapping TypeName="CrystalBeamModel.staff_details">
+              <MappingFragment StoreEntitySet="staff_details">
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="other_name" ColumnName="other_name" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_previledge" ColumnName="user_previledge" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="student_details">
+            <EntityTypeMapping TypeName="CrystalBeamModel.student_details">
+              <MappingFragment StoreEntitySet="student_details">
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="other_name" ColumnName="other_name" />
+                <ScalarProperty Name="nationalty" ColumnName="nationalty" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="time_in" ColumnName="time_in" />
+                <ScalarProperty Name="time_out" ColumnName="time_out" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="visitor_details">
+            <EntityTypeMapping TypeName="CrystalBeamModel.visitor_details">
+              <MappingFragment StoreEntitySet="visitor_details">
+                <ScalarProperty Name="visitor_id" ColumnName="visitor_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="other_name" ColumnName="other_name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="time_in" ColumnName="time_in" />
+                <ScalarProperty Name="time_out" ColumnName="time_out" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
